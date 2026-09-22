@@ -1,0 +1,51 @@
+{
+  "source": "https://www.tesla.com/api/energy/ecg/megapackPricing",
+  "discovered_via": "Public pricing endpoint called by Tesla's own Megapack order configurator at tesla.com/megapack/design. Same data the page shows a customer; read directly rather than scraped off the rendered DOM.",
+  "captured_date": "2026-09-19",
+  "query_parameters": ["megapackCount", "megapackVariation", "megapackDeliveryDate", "stateCode", "cacheBustString"],
+  "notes": [
+    "Prices exclude taxes and installation.",
+    "Earliest selectable delivery was 2027 Q1; no 2026 quarters were offered.",
+    "cacheBustString observed as '0915Lease0Escalator'.",
+    "Configurator returns totalPrice and annualMaintenancePrice only."
+  ],
+
+  "unit_specs": {
+    "_comment": "Per-Megapack nameplate, confirmed linear in count: at n=5 the 4h config reads 4.9 MW / 19.6 MWh and at n=10 it reads 9.8 MW / 39.2 MWh. The 2h config trades usable energy for power, which is physically expected at a higher discharge rate.",
+    "2hXL": {"power_mw_per_unit": 1.92, "energy_mwh_per_unit": 3.86, "verified_at_count": [5]},
+    "4hXL": {"power_mw_per_unit": 0.98, "energy_mwh_per_unit": 3.92, "verified_at_count": [5, 10]}
+  },
+
+  "quantity_curve": {
+    "_fixed": {"state": "CA", "delivery": "2027 Q1"},
+    "counts":      [1, 2, 3, 4, 5, 7, 10, 15, 20, 30, 40, 50],
+    "price_2hXL":  [1028580, 2032780, 3036990, 4041190, 5045400, 6825150, 9740110, 14115990, 18813720, 28209180, 37604640, 47000110],
+    "price_4hXL":  [962350, 1900320, 2838300, 3776270, 4714250, 6376570, 9099280, 13186510, 17574410, 26350220, 35126020, 43901830],
+    "annual_maintenance": [8830, 14030, 19220, 24420, 29610, 40000, 55580, 81550, 107520, 159470, 211410, 263350]
+  },
+
+  "by_state": {
+    "_fixed": {"count": 5, "variation": "2hXL", "delivery": "2027 Q1"},
+    "prices": {
+      "CA": 5045400, "NV": 5045400, "AZ": 5060430, "WY": 5093590,
+      "WA": 5098230, "TX": 5193200, "IL": 5208960, "NY": 5319510,
+      "FL": 5332520, "MA": 5345950, "HI": 5434560, "PR": 5448430
+    }
+  },
+
+  "by_delivery_quarter": {
+    "_fixed": {"count": 5, "variation": "2hXL", "state": "CA"},
+    "prices": {
+      "2027 Q1": 5045400, "2027 Q2": 5045400,
+      "2027 Q3": 5045400, "2027 Q4": 5045400
+    },
+    "finding": "No price variation across delivery quarters. Tesla does not charge a premium for earlier delivery, so there is no expediting lever available at the order stage."
+  },
+
+  "observed_structure": [
+    "Price is exactly linear in count within 1-5 units: each additional 2hXL unit adds $1,004,205 and each 4hXL unit adds $937,975.",
+    "Both variations imply the SAME fixed order charge of $24,375, independent of size or configuration.",
+    "Per-unit price falls with volume and flattens around 20 units: the 2hXL marginal unit drops to $939,546 and the 4hXL to $877,581, roughly a 6-7% volume discount.",
+    "State pricing forms a freight gradient with CA and NV cheapest. Hawaii (+7.7%) and Puerto Rico (+8.0%) are highest, consistent with shipping distance from the Lathrop, CA Megafactory."
+  ]
+}

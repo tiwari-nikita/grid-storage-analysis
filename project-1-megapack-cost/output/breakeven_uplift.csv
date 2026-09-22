@@ -1,0 +1,7 @@
+tariff_pct,import_landed_usd_per_kwh,breakeven_us_uplift_multiple
+0.0,63.0,1.64
+10.0,69.0,1.74
+20.0,75.0,1.84
+28.4,80.04,1.93
+40.0,87.0,2.04
+60.0,99.0,2.24

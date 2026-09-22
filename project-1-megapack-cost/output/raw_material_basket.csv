@@ -1,0 +1,10 @@
+material,kg_per_kwh,usd_per_kg,usd_per_kwh,provenance,note,share_pct
+Copper,0.688,13.9,9.556,sourced,"~$6.30/lb, Sept 2026",31.658
+Lithium carbonate,0.468,19.5,9.133,sourced,"Benchmark/SMM spot, Sept 2026, ~$19,300-19,750/t",30.257
+Aluminium,1.375,3.25,4.469,sourced,"LME ~$3,250/t, Sept 2026",14.804
+Electrolyte (solvents + salt),0.75,5.0,3.75,estimate,"LiPF6-based, largely petrochemical solvents",12.423
+Phosphoric acid,1.242,1.0,1.242,estimate,"industrial grade, ~$1,000/t",4.115
+"Graphite (natural flake, raw)",1.062,0.7,0.744,estimate,"raw flake, before anode processing",2.464
+Binders and additives,0.188,3.0,0.562,estimate,PVDF and conductive carbon,1.863
+Separator (polyolefin),0.188,2.0,0.375,estimate,raw PP/PE polymer,1.242
+Iron (battery precursor),0.708,0.5,0.354,estimate,purified iron source; iron ore itself is ~$0.10/kg,1.173

@@ -1,0 +1,4 @@
+level,usd_per_kwh,idiot_index,reading
+Raw materials,30.19,1.0,the material floor
+LFP cell (Chinese market price),60.0,1.99,cell manufacturing roughly doubles the material cost
+Megapack energy capacity (Tesla price),218.18,7.23,everything downstream of the cell adds the rest

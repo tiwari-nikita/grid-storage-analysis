@@ -1,0 +1,64 @@
+{
+  "source": "https://www.tesla.com/megapack/design",
+  "captured_utc": "2026-09-19",
+  "capture_method": "Tesla public Megapack configurator, read directly from the order page",
+  "notes": [
+    "Earliest selectable delivery quarter was Q1 2027. No 2026 quarters offered.",
+    "Delivery quarters offered: 2027 Q1, Q2, Q3, Q4.",
+    "Prices exclude taxes and installation.",
+    "Site location held constant at California for both observations."
+  ],
+
+  "observations": [
+    {
+      "id": "ca_5units_2hr",
+      "megapack_quantity": 5,
+      "duration_hr": 2,
+      "site_state": "CA",
+      "delivery_quarter": "2027 Q1",
+      "power_mw": 9.6,
+      "energy_mwh": 19.3,
+      "price_usd": 5045400,
+      "annual_maintenance_usd": 29610,
+      "maintenance_escalator_pct_per_yr": 2.0,
+      "reservation_deposit_usd": 10000
+    },
+    {
+      "id": "ca_5units_4hr",
+      "megapack_quantity": 5,
+      "duration_hr": 4,
+      "site_state": "CA",
+      "delivery_quarter": "2027 Q1",
+      "power_mw": 4.9,
+      "energy_mwh": 19.6,
+      "price_usd": 4714250
+    }
+  ],
+
+  "derived": {
+    "method": "Two observations hold unit count constant (5) and energy near-constant (19.3 vs 19.6 MWh) while power halves (9.6 -> 4.9 MW). Solving price = a*energy_kWh + b*power_kW as a 2x2 linear system separates energy-capacity cost from power-conversion cost.",
+    "equations": [
+      "19300a + 9600b = 5045400",
+      "19600a + 4900b = 4714250"
+    ],
+    "energy_cost_usd_per_kwh": 219.41,
+    "power_cost_usd_per_kw": 84.46,
+    "residual_check": {
+      "ca_5units_2hr_predicted": 5045429,
+      "ca_5units_4hr_predicted": 4714290,
+      "comment": "Fits both points to within rounding, as expected for 2 equations and 2 unknowns."
+    },
+    "blended_headline": {
+      "2hr_usd_per_kwh": 261.42,
+      "4hr_usd_per_kwh": 240.52,
+      "2hr_usd_per_kw": 525.56,
+      "4hr_usd_per_kw": 962.09
+    }
+  },
+
+  "caveats": [
+    "IMPORTANT: two equations with two unknowns fit exactly by construction. This is not yet evidence that pricing is linear in energy and power.",
+    "Before relying on the decomposition, gather additional points by varying megapack_quantity and site_state to test linearity and check for volume breaks or state-level freight/tax effects.",
+    "Configurator price is a customer-facing quote, not Tesla's internal cost. The decomposition separates PRICE into energy and power components; converting to cost requires a margin assumption."
+  ]
+}

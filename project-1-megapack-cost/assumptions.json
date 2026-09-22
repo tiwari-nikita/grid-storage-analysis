@@ -1,0 +1,108 @@
+{
+  "_README": "Every number the localization model depends on lives here, with its provenance marked. 'sourced' means taken from a cited public document. 'estimate' means a judgement call with a stated range, and the model runs sensitivity over that range rather than pretending to a point answer. Change a value here and re-run; nothing is hardcoded downstream.",
+  "as_of": "2026-09-19",
+
+  "decomposition": {
+    "_source": "Derived in decompose_price.py from Tesla's public pricing API, 18 overdetermined observations, R-squared 1.000000",
+    "provenance": "sourced",
+    "energy_price_usd_per_kwh_small_order": 218.18,
+    "energy_price_usd_per_kwh_volume_order": 204.13,
+    "power_price_usd_per_kw_small_order": 84.38,
+    "power_price_usd_per_kw_volume_order": 78.95,
+    "fixed_order_charge_usd": 24373,
+    "energy_share_of_price_pct": 91.2
+  },
+
+  "cell_cost": {
+    "china_lfp_cell_usd_per_kwh": {
+      "value": 60.0,
+      "low": 45.0,
+      "high": 85.0,
+      "provenance": "sourced-range",
+      "note": "BNEF and tender data for 2025-26 put utility LFP cells roughly in the 55-78 USD/kWh band, with outlier stationary-storage transactions as low as 36. Central case set at 60; sensitivity runs the full band.",
+      "sources": [
+        "https://about.bnef.com/insights/clean-transport/lithium-ion-battery-pack-prices-fall-to-108-per-kilowatt-hour-despite-rising-metal-prices-bloombergnef/",
+        "https://www.energy-storage.news/li-ion-battery-pack-prices-fell-8-since-last-year-despite-metals-prices-rising-bloombergnef-says/"
+      ]
+    },
+    "us_cost_uplift_multiple": {
+      "value": 1.30,
+      "low": 1.15,
+      "high": 1.60,
+      "provenance": "estimate",
+      "note": "US LFP cell manufacturing cost relative to mature Chinese production: higher labour, immature domestic precursor supply, lower yields during ramp. No authoritative public figure exists; this is the single softest assumption in the model and is treated as such."
+    }
+  },
+
+  "trade_policy": {
+    "section_301_rate_pct": {
+      "value": 25.0,
+      "provenance": "sourced",
+      "note": "Raised from 7.5% to 25% on lithium-ion non-EV (storage) batteries effective 1 January 2026.",
+      "sources": [
+        "https://blog.fluenceenergy.com/impact-us-tariffs-energy-storage-industry",
+        "https://source.benchmarkminerals.com/article/us-battery-imports-fall-to-five-year-low-after-section-301-tariffs-raised-to-25-"
+      ]
+    },
+    "general_tariff_rate_pct": {
+      "value": 3.4,
+      "provenance": "sourced",
+      "note": "Standard duty on lithium-ion battery imports, stacking with Section 301 for a combined 28.4%."
+    },
+    "ocean_freight_usd_per_kwh": {
+      "value": 3.0,
+      "low": 1.5,
+      "high": 6.0,
+      "provenance": "estimate",
+      "note": "China-to-US-West-Coast container freight allocated per kWh of cell. Varies with rate cycle."
+    }
+  },
+
+  "tax_credits": {
+    "credit_45x_cell_usd_per_kwh": {
+      "value": 35.0,
+      "provenance": "sourced",
+      "note": "Section 45X advanced manufacturing production credit for battery cells.",
+      "sources": ["https://www.congress.gov/crs-product/IF12809"]
+    },
+    "credit_45x_module_usd_per_kwh": {
+      "value": 10.0,
+      "provenance": "sourced",
+      "note": "Section 45X credit for battery modules. Stacks with the cell credit when both steps are domestic."
+    },
+    "credit_45x_phase_down": {
+      "provenance": "sourced",
+      "note": "Share of full credit value by production year.",
+      "schedule": {"2026": 1.0, "2027": 1.0, "2028": 1.0, "2029": 1.0,
+                   "2030": 0.75, "2031": 0.50, "2032": 0.25, "2033": 0.0}
+    },
+    "itc_rate_pct": {
+      "value": 30.0,
+      "provenance": "sourced",
+      "note": "Section 48E investment tax credit base rate, the credit a storage project puts at risk if it fails FEOC material-assistance thresholds."
+    }
+  },
+
+  "feoc": {
+    "provenance": "sourced",
+    "note": "Prohibited Foreign Entity rules enacted 4 July 2025 under OBBBA; Treasury Notice 2026-15 (12 Feb 2026) gave operational guidance. Applies to projects beginning construction in 2026 or later. Storage projects must meet a Material Assistance Cost Ratio - a minimum share of material value from non-prohibited sources - which ratchets upward annually.",
+    "sources": [
+      "https://www.morganlewis.com/pubs/2026/03/how-feoc-rules-are-reshaping-energy-storage-tax-credit-eligibility",
+      "https://foleyhoag.com/news-and-insights/blogs/energy-and-climate-counsel/2026/july/the-prohibited-foreign-entity-(or-feoc)-rules-and-battery-storage/"
+    ],
+    "macr_threshold_pct_by_year": {"2026": 60, "2027": 65, "2028": 70, "2029": 75, "2030": 80},
+    "macr_note": "Threshold shown is the required non-prohibited share of material value. Reported as 60% for 2026 rising 5-10 points per year; the upper path is modelled as +5/yr and flagged as uncertain."
+  },
+
+  "plant": {
+    "us_capex_usd_per_kwh_annual_capacity": {
+      "value": 80.0,
+      "low": 60.0,
+      "high": 110.0,
+      "provenance": "estimate",
+      "note": "Greenfield LFP cell plant capex per kWh of annual nameplate output."
+    },
+    "amortisation_years": {"value": 10, "provenance": "estimate"},
+    "utilisation_pct": {"value": 85, "low": 65, "high": 95, "provenance": "estimate"}
+  }
+}

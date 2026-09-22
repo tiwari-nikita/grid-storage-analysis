@@ -1,0 +1,6 @@
+horizon_years,pct_built,pct_built_ci_lo,pct_built_ci_hi,pct_withdrawn,pct_still_waiting,pct_built_naive_km,naive_overstatement_x
+2,3.53,3.25,3.82,35.03,61.43,4.65,1.32
+3,5.75,5.44,6.07,44.55,49.7,8.35,1.45
+5,11.25,10.75,11.7,63.15,25.6,21.91,1.95
+7,15.59,15.02,16.16,68.79,15.62,37.25,2.39
+10,20.03,19.28,20.85,72.29,7.68,58.04,2.9

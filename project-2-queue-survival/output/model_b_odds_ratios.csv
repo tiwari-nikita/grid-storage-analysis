@@ -1,0 +1,19 @@
+feature,coef,odds_ratio
+tech_Nuclear,2.5924,13.3617
+region_SPP,2.4735,11.8633
+tech_Coal,2.1474,8.5629
+tech_Gas,1.8768,6.5325
+region_ERCOT,1.7192,5.5802
+has_ia,1.1184,3.0599
+region_PJM,1.0254,2.7881
+tech_Other,0.9491,2.5834
+tech_Wind,0.6413,1.8989
+tech_Solar,0.3001,1.35
+service_NRIS,0.2097,1.2333
+region_MISO,0.0624,1.0644
+cohort,-0.1887,0.8281
+tech_Offshore Wind,-0.5158,0.597
+log_mw,-0.5933,0.5525
+tech_Solar+Battery,-0.5936,0.5523
+service_Unknown,-0.7378,0.4782
+service_NRIS/ERIS,-1.4399,0.2369

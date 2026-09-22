@@ -1,0 +1,8 @@
+line,import_usd_per_kwh,localise_usd_per_kwh
+Chinese LFP cell price,60.0,
+Tariff (Sec 301 25% + general 3.4%),17.04,0.0
+Ocean freight,3.0,0.0
+US manufacturing cost (1.3x uplift),,78.0
+"Plant capex, amortised",,9.41
+Section 45X credit (cell + module),0.0,-45.0
+LANDED COST,80.04,42.41
