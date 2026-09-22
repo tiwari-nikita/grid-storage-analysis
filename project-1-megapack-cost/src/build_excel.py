@@ -42,9 +42,9 @@ NOTES = [
      "rather than cells, which lets price be solved into an energy rate ($/kWh) and a "
      "power rate ($/kW).", 11, False),
     ("Crucially this is not algebra on two numbers. The model is fitted by least squares "
-     "across 24 observed prices against 3 unknowns, so it is heavily overdetermined and "
-     "the residuals are a genuine test. It fits to R-squared 1.000000 with a worst "
-     "residual of 0.000%, which means the decomposition is not an approximation - it "
+     "across 18 of the 24 observed prices - the two linear volume tiers, 3 unknowns each - "
+     "so it is heavily overdetermined and the residuals are a genuine test. It fits to "
+     "R-squared 1.000000 with a worst residual under 0.001%, so the decomposition is not an approximation - it "
      "recovers the pricing formula itself.", 11, False),
     ("", 11, False),
     ("HEADLINE NUMBERS", 12, True),

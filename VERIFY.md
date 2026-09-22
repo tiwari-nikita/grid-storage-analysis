@@ -104,6 +104,33 @@ number looking perfectly plausible:
 - **`test_p2_confidence_intervals_bracket_estimates`** — every bootstrap interval
   must contain its own point estimate.
 
+## Independent audit
+
+The claim tests above check the outputs the project code produced. That's
+necessary but a little circular: a bug in the code could produce a wrong number
+and a test that faithfully asserts it.
+
+`tests/independent_audit.py` closes that gap. It imports nothing from `src/`,
+recomputes the key findings by *different methods*, and checks them against
+ground truth the project didn't produce. `verify.py` runs it as its final stage;
+it also runs standalone with `python tests/independent_audit.py`.
+
+| Check | Method | Ground truth |
+|---|---|---|
+| Energy / power / fixed rates | Exact differencing and Cramer's rule on 4 prices, not least squares | The project's fitted values |
+| Out-of-sample fit | Predicts 6 prices never used in the derivation | Tesla's published prices — worst error 0.00026% |
+| Queue completion shares | Capacity-weighted shares, 2000–2020 cohorts, read from the raw workbook | **LBNL's own published headline**: 13% / 75% / 10%. Audit gets 12.8% / 75.2% / 10.7% |
+| ISO-NE reporting gap | Counted directly from the raw workbook | 228 operational projects, 0 COD dates |
+| Competing-risks estimate | Textbook step-by-step loop, not the vectorised estimator | Project's 20.03% / 58.04% |
+| Lithium stoichiometry | Standard atomic masses, not the script's constants | Published 0.47 kg LCE/kWh |
+
+The LBNL check is the strongest single piece of evidence in the repo: the
+organisation that publishes the dataset computed the same figures from the same
+data, and this pipeline reproduces them.
+
+Sections A–D and F read only `data/raw/`. Section E reads the processed survival
+dataset, so it needs the pipeline to have run first — `verify.py` handles that.
+
 ## What this layer does not do
 
 It verifies that the code produces the numbers claimed, and that it does so from

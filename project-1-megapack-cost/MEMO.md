@@ -17,7 +17,7 @@ On that decision: domestic LFP cells land at **$42/kWh against $80/kWh imported*
 
 Tesla sells the same hardware in two configurations — a 2-hour unit at 1.92 MW / 3.86 MWh, and a 4-hour unit at 0.98 MW / 3.92 MWh. Nearly identical energy, half the power. Any price difference between them is therefore attributable to power-conversion hardware rather than cells, which is enough to solve price into separate energy and power rates.
 
-Two equations and two unknowns would fit perfectly by construction and prove nothing, so the model is fitted by least squares across all 24 observed prices against 3 unknowns. The perfect fit across that many degrees of freedom is the finding: this isn't a curve fit, it recovers the pricing formula itself.
+Two equations and two unknowns would fit perfectly by construction and prove nothing, so the model is fitted by least squares across 18 of the 24 observed prices — the two linear volume tiers (1–5 and 20–50 units), each against 3 unknowns. The in-between quantities of 7, 10 and 15 units sit on the discount step and are left out of the fit. The perfect fit across that many degrees of freedom is the finding: this isn't a curve fit, it recovers the pricing formula itself.
 
 Three things fall out that Tesla doesn't publish:
 

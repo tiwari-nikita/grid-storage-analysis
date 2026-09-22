@@ -37,7 +37,8 @@ solve `price = fixed + a·kWh + b·kW`.
 
 **Why this isn't just algebra on two numbers.** Two equations with two unknowns fit
 perfectly by construction and prove nothing. The model is fitted by least squares
-across all 24 observed prices against 3 unknowns — heavily overdetermined, so the
+across 18 of the 24 observed prices — the two linear volume tiers, 3 unknowns each,
+with the 7/10/15-unit points on the discount step left out — heavily overdetermined, so the
 residuals are a real test. It fits perfectly anyway, which means the decomposition
 recovers the pricing formula rather than approximating it.
 

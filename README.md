@@ -6,8 +6,9 @@ Both built on real public data, September 2026.
 python verify.py
 ```
 
-Rebuilds every result from hash-pinned source data and asserts all 24 published
-figures. Takes about a minute. See [VERIFY.md](VERIFY.md) for the claim-by-claim
+Rebuilds every result from hash-pinned source data, asserts all 29 published
+figures, then runs an independent audit that reproduces LBNL's own published
+numbers without touching the project code. Takes about a minute. See [VERIFY.md](VERIFY.md) for the claim-by-claim
 ledger.
 
 The energy-storage business has two hard constraints that have nothing to do with
@@ -92,7 +93,7 @@ it builds nothing).
 ```
 verify.py           one command: rebuild everything, assert every claim
 VERIFY.md           claim -> script -> test -> source ledger
-tests/              24 executable assertions, one per published figure
+tests/              29 executable claim assertions + a 13-check independent audit
 data/raw/           source data as captured, hash-pinned, with provenance notes
 data/processed/     cached intermediates and audit trails (regenerated)
 project-1-.../      src/ · output/ · README.md · MEMO.md · assumptions.json

@@ -4,8 +4,9 @@ One command that proves the whole thing works.
     python verify.py
 
 Checks dependencies, confirms the raw inputs are byte-identical to what was
-captured, rebuilds every result from scratch, then asserts each published claim
-against the freshly generated outputs.
+captured, rebuilds every result from scratch, asserts each published claim
+against the freshly generated outputs, then runs an independent audit that
+recomputes the key findings by different methods without touching project code.
 
 Written so that a reviewer who has never seen this repo can establish in about a
 minute whether the numbers are real. Exit code 0 means every claim holds.
@@ -101,6 +102,24 @@ def run_claims():
     return proc.returncode == 0
 
 
+def run_audit():
+    head("4. INDEPENDENT AUDIT (uses none of the project code)")
+    proc = subprocess.run([sys.executable, str(ROOT / "tests" / "independent_audit.py")],
+                          capture_output=True, text=True, cwd=str(ROOT))
+    for line in proc.stdout.splitlines():
+        if line.startswith("  PASS"):
+            print("  {}ok{}  {}".format(GREEN, OFF, line[8:]))
+        elif line.startswith("  FAIL"):
+            print("  {}FAIL{} {}".format(RED, OFF, line[8:]))
+        elif line.startswith("INDEPENDENT AUDIT:"):
+            print()
+            print("  " + BOLD + line + OFF)
+    if proc.returncode != 0 and "INDEPENDENT AUDIT:" not in proc.stdout:
+        for line in (proc.stderr or "").strip().splitlines()[-6:]:
+            print("        {}{}{}".format(DIM, line[:100], OFF))
+    return proc.returncode == 0
+
+
 def main():
     print(BOLD + "\nGrid-storage supply chain analysis - verification\n" + OFF)
     print("  repo: {}".format(ROOT))
@@ -112,10 +131,11 @@ def main():
 
     built = run_pipeline()
     claims = run_claims() if built else False
+    audit = run_audit() if built else False
 
     head("RESULT")
-    if built and claims:
-        print("  {}{}All results rebuilt from raw data and every claim verified.{}".format(
+    if built and claims and audit:
+        print("  {}{}All results rebuilt, every claim verified, independent audit clean.{}".format(
             GREEN, BOLD, OFF))
         print("  {}total {:.0f}s{}".format(DIM, time.time() - t0, OFF))
         print()
