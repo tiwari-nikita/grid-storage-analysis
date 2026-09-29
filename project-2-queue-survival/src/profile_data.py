@@ -31,6 +31,8 @@ for c in df.columns:
 for c in DATE_COLS:
     df[c] = pd.to_datetime(df[c], errors="coerce")
 
+# data/processed/ is gitignored, so it doesn't exist on a fresh clone.
+pathlib.Path(CACHE).parent.mkdir(parents=True, exist_ok=True)
 df.to_parquet(CACHE, index=False)   # cache so we never re-parse 15MB of xlsx
 
 pd.set_option("display.width", 200)
