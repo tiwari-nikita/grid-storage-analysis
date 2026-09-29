@@ -3,6 +3,7 @@
 Both built on real public data, September 2026.
 
 ```bash
+pip install -r requirements.txt
 python verify.py
 ```
 
@@ -103,3 +104,7 @@ project-2-.../      src/ · output/ · README.md · MEMO.md
 Each project's `README.md` lists its scripts in run order. Both run end to end from
 raw data with `pandas`, `numpy`, `matplotlib`, `openpyxl`, `scikit-learn` and `pyarrow`
 on Python 3.10+.
+
+## License
+
+Code is released under the MIT License (see [LICENSE](LICENSE)). The data belongs to its original publishers and keeps its original license; see the sources above.
