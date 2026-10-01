@@ -1,5 +1,12 @@
 # Two analyses of the grid-storage supply chain
 
+> **In plain English.** Big batteries that store electricity for the power grid face two problems that have nothing to do with building them: what they really cost once tariffs and trade rules are counted, and whether the project they're bought for ever gets built. This repo answers both with public data.
+>
+> - **What's in the price of a Tesla Megapack?** Using only the prices on Tesla's own website, I worked out the formula behind them: about $218 for each kilowatt-hour of storage, $84 for each kilowatt of power, and a $24,373 flat fee. It matches all 18 prices it was built from exactly. About 91% of the price pays for storage capacity, which is the part exposed to Chinese battery-cell supply, US tariffs and US sourcing rules.
+> - **How many grid projects ever get built?** Of 20,087 requests to connect a new project to the US grid since 1997, about 1 in 5 is built within ten years and almost 3 in 4 are withdrawn. An identical battery project is about 8 times as likely to be built in Texas (ERCOT, 22.6%) as in California (CAISO, 2.7%).
+>
+> Every number here is checked by an automated test, and one command rebuilds it all from the original data. The technical version follows.
+
 Both built on real public data, September 2026.
 
 ```bash
